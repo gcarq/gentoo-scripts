@@ -8,12 +8,20 @@ if [[ "$EUID" -ne 0 ]]; then
     exit 1
 fi
 
-pushd /usr/src/linux > /dev/null 2>&1
+LINUX_SRC='/usr/src/linux'
+
+if [[ ! -d "${LINUX_SRC}" || ! -f "${LINUX_SRC}/Makefile" ]]; then
+    echo "Could not find a Makefile in the kernel source directory."
+    echo "Please ensure that /usr/src/linux points to a complete set of Linux sources"
+    exit 1
+fi
+
+pushd "${LINUX_SRC}" > /dev/null 2>&1
 
 # Use current config if .config does not exist
-if [[ ! -f /usr/src/linux/.config ]]; then
-    echo ".config not found. Using /proc/config.gz"
-    zcat /proc/config.gz > /usr/src/linux/.config
+if [[ ! -f "${LINUX_SRC}/.config" ]]; then
+    echo "kernel config not found. Using /proc/config.gz"
+    zcat /proc/config.gz > "${LINUX_SRC}/.config"
 fi
 
 # Update current config utilising a provided .config as base
