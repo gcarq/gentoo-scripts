@@ -34,6 +34,10 @@ make -j$(($(nproc)-1))
 # Install modules and kernel
 make modules_install install
 
+# Backup kernel config
+mkdir -p /etc/kernels
+cp -v .config "/etc/kernels/kernel-config-$(uname -m)-$(make kernelversion)"
+
 # Generate initramfs
 dracut --hostonly --force '' "$(make kernelversion)"
 
