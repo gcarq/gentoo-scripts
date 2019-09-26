@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # Simple Kernel update script for Gentoo Linux
 # Michael Egger <michael.egger@tsn.at>
-# See LICENSE.md for copyright information
+# See LICENSE for copyright information
 
 if [[ "$EUID" -ne 0 ]]; then
     echo "Please run as root"
