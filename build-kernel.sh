@@ -44,4 +44,9 @@ dracut --hostonly --force '' "$(make kernelversion)"
 # Generate grub config
 grub-mkconfig -o /boot/grub/grub.cfg
 
+if [[ -f /usr/bin/chkboot ]]; then
+    echo "Running chkboot ..."
+    /usr/bin/chkboot
+fi
+
 popd > /dev/null 2>&1
