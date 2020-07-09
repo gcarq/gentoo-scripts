@@ -19,19 +19,17 @@ FLAGS:
     -s, --sync              Refresh repositories prior to emerge
     -h, --help              Prints help information
 
+All arguments passed after '--' are forwarded to emerge.
 EOF
 }
 
 while test $# -gt 0; do
     case "$1" in
-        -s|--sync) emaint sync -a; layman -S
-            ;;
-        -h|--help) usage; exit 0
-            ;;
-        *) printf 'Invalid argument: %s\n\n' "$1"; usage; exit 1
-            ;;
+        -s | --sync ) emaint sync -a; layman -S; shift;;
+        -h | --help ) usage; exit 0;;
+        -- ) shift; break;;
+        * ) printf 'Invalid argument: %s\n\n' "$1"; usage; exit 1;;
     esac
-    shift
 done
 
 printf 'Invoking emerge ...\n'
@@ -43,7 +41,7 @@ emerge --ask \
        --newuse \
        --update \
        --with-bdeps=y \
-       @world
+       @world "$@"
 
 printf 'Checking for unused dependencies ...\n'
 emerge --ask --quiet --depclean
