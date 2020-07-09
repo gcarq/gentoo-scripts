@@ -1,6 +1,6 @@
 #!/bin/bash -e
 # Resolves runtime dependency packagenames for a given file on Gentoo Linux
-# Michael Egger <michael.egger@tsn.at>
+# Michael Egger <egger.m@protonmail.com>
 # See LICENSE for copyright information
 
 if [ $# -eq 0 ]; then

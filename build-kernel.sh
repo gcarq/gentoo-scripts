@@ -1,6 +1,6 @@
 #!/bin/bash -e
 # Simple Kernel update script for Gentoo Linux
-# Michael Egger <michael.egger@tsn.at>
+# Michael Egger <egger.m@protonmail.com>
 # See LICENSE for copyright information
 
 if [[ "$EUID" -ne 0 ]]; then
