@@ -50,3 +50,6 @@ if [[ -f /usr/bin/chkboot ]]; then
 fi
 
 popd > /dev/null 2>&1
+
+# Rebuild modules against new kernel
+emerge --ask @module-rebuild
