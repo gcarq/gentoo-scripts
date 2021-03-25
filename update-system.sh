@@ -46,5 +46,7 @@ emerge --ask \
 printf 'Checking for unused dependencies ...\n'
 emerge --ask --quiet --depclean
 
-printf 'Removing obsolete entries in /etc/portage/package.* ...\n'
-portpeek -krf
+if [[ -f /usr/bin/portpeek ]]; then
+    printf 'Removing obsolete entries in /etc/portage/package.* ...\n'
+    portpeek -krf
+fi
