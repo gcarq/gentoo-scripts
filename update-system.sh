@@ -25,7 +25,7 @@ EOF
 
 while test $# -gt 0; do
     case "$1" in
-        -s | --sync ) emaint sync -a; layman -S; shift;;
+        -s | --sync ) emaint sync -a; shift;;
         -h | --help ) usage; exit 0;;
         -- ) shift; break;;
         * ) printf 'Invalid argument: %s\n\n' "$1"; usage; exit 1;;
