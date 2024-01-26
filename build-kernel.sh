@@ -3,6 +3,7 @@
 # Michael Egger <egger.m@protonmail.com>
 # See LICENSE for copyright information
 
+
 if [[ "$EUID" -ne 0 ]]; then
     echo "Please run as root"
     exit 1
@@ -38,18 +39,4 @@ make modules_install install
 mkdir -p /etc/kernels
 cp -v .config "/etc/kernels/kernel-config-$(uname -m)-$(make kernelversion)"
 
-# Generate initramfs
-dracut --hostonly --force '' "$(make kernelversion)"
-
-# Generate grub config
-grub-mkconfig -o /boot/grub/grub.cfg
-
-if [[ -f /usr/bin/chkboot ]]; then
-    echo "Running chkboot ..."
-    /usr/bin/chkboot
-fi
-
 popd > /dev/null 2>&1
-
-# Rebuild modules against new kernel
-emerge --ask @module-rebuild
